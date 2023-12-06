@@ -15,14 +15,20 @@ jobs:
         steps:
             -   uses: actions/checkout@v3
 
-            -   name: Cloud Functions Deploying
-                uses: google-github-actions/deploy-cloud-functions@v0.1.2
+            -   id: auth
+                uses: google-github-actions/auth@v1
                 with:
-                    credentials: ${{ secrets.GCP_SA_KEY }}
-                    name: gh_profile_repo_card
-                    description: Personal project made to showcase most recent Github repo on GitHub profile's README.md file. Dynamic and updates every ~1 minute.
-                    region: us-central1
-                    project_id: ${{ secrets.GCP_PROJECT_ID }}
-                    source_dir: ./
-                    entry_point: card
-                    runtime: nodejs20
+                    credentials_json: ${{ secrets.GCP_SA_KEY }}
+                
+            -   name: Set up Cloud SDK
+                uses: google-github-actions/setup-gcloud@v1
+            
+            -   name: Deploying the functions
+                run : |-
+                    gcloud deploy functions recent_repo_card
+                        --trigger-http
+                        --runtime=nodejs20 
+                        --region=us-central1 
+                        --entry-point=card 
+                        --gen2 
+                        --allow-unauthenticated
