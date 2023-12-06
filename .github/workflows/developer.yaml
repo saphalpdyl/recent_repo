@@ -22,6 +22,7 @@ jobs:
                     name: gh_profile_repo_card
                     description: Personal project made to showcase most recent Github repo on GitHub profile's README.md file. Dynamic and updates every ~1 minute.
                     region: us-central1
+                    project_id: ${{ secrets.GCP_PROJECT_ID }}
                     source_dir: ./
                     entry_point: card
                     runtime: nodejs20
