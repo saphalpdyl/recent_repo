@@ -31,10 +31,9 @@ export const card = async (_,res) => {
 
   let commit_count = 0;
   let commit_text = "";
-  console.log(commits[0].commit)
   for (const commit of commits) {
-      sha = commit.sha.substring(0,7);
-      desc = commit.commit.message;
+      const sha = commit.sha.substring(0,7);
+      const desc = commit.commit.message;
       commit_text += createCommitText(sha,truncateString(desc,TRUNCATE_CHAR_THRESHOLD),commit_count)
 
       commit_count++;
