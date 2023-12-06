@@ -1,0 +1,19 @@
+{
+  "name": "github_profile_recent_repo_card",
+  "version": "1.0.0",
+  "description": "This is a personal project I made to showcase my most recent Github repo on my profile README.md file. The card is dynamic and updates every ~1 minute.",
+  "main": "index.js",
+  "scripts": {
+    "start" : "npx functions-framework --target=card"
+  },
+  "keywords": [
+    "cloud-functions",
+    "gcp",
+    "google-cloud"
+  ],
+  "author": "saphalpdyl",
+  "license": "MIT",
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.3.0"
+  }
+}
