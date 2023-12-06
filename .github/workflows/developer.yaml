@@ -1,9 +1,6 @@
 name: Cloud Functions Deployment
 
 on:
-    push:
-        branches:
-            [main]
     pull_request:
         branches:
             [main]
