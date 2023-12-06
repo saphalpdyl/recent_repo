@@ -1,0 +1,27 @@
+name: Cloud Functions Deployment
+
+on:
+    push:
+        branches:
+            [main]
+    pull_request:
+        branches:
+            [main]
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v3
+
+            -   name: Cloud Functions Deploying
+                uses: google-github-actions/deploy-cloud-functions@v0.1.2
+                with:
+                    credentials: ${{ secrets.GCP_SA_KEY }}
+                    name: gh_profile_repo_card
+                    description: Personal project made to showcase most recent Github repo on GitHub profile's README.md file. Dynamic and updates every ~1 minute.
+                    region: us-central1
+                    source_dir: ./
+                    entry_point: card
+                    runtime: nodejs20
