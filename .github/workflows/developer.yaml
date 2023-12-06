@@ -25,7 +25,7 @@ jobs:
             
             -   name: Deploying the functions
                 run : |-
-                    gcloud deploy functions recent_repo_card
+                    gcloud functions deploy recent_repo_card
                         --trigger-http
                         --runtime=nodejs20 
                         --region=us-central1 
