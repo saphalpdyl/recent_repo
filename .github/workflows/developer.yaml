@@ -25,10 +25,4 @@ jobs:
             
             -   name: Deploying the functions
                 run : |-
-                    gcloud functions deploy recent_repo_card
-                        --trigger-http
-                        --runtime=nodejs20 
-                        --region=us-central1 
-                        --entry-point=card 
-                        --gen2 
-                        --allow-unauthenticated
+                    gcloud functions deploy recent_repo_card --trigger-http --runtime=nodejs20 --region=us-central1 --entry-point=card --gen2 --allow-unauthenticated
