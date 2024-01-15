@@ -46,7 +46,6 @@ export const card = async (_,res) => {
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader('access-control-allow-origin','*')
   res.setHeader('Cache-Control','no-store')
-  res.setHeader('Age','10')
   res.send(`
     <svg xmlns="http://www.w3.org/2000/svg" width="600" height="200">
         <rect width="600" height="200" style="fill:#212121;" stroke="#4CCF90" stroke-width="2" />
