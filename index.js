@@ -2,9 +2,10 @@
 const COMMITS_TO_REQUEST = 3;
 const TRUNCATE_CHAR_THRESHOLD = 50;
 const GITHUB_USERNAME = 'saphalpdyl';
+const SORT_BY = 'pushed';
 
 export const card = async (_,res) => {
-  const repo_response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&order=desc`);
+  const repo_response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=${SORT_BY}&order=desc`);
   const json_response = await repo_response.json();
   const repo = json_response[0];
 
