@@ -23,7 +23,13 @@ export const card = async (_,res) => {
             ${sha} -
         </text>
         <text x="80" y="${130 + 24 * commit_no}" fill="#fff" font-size="12" font-family="Segoe UI,Verdana,sans-serif">
-            ${commit_msg}
+            ${
+                commit_msg.replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&apos;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/</g, '&lt;')
+            }
         </text>
     `;
   }
