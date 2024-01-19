@@ -5,7 +5,8 @@
   "description": "This is a personal project I made to showcase my most recent Github repo on my profile README.md file. The card is dynamic and updates every ~1 minute.",
   "main": "index.js",
   "scripts": {
-    "start" : "npx functions-framework --target=card"
+    "start": "npx functions-framework --target=card",
+    "dev": "nodemon -L ./test_express.js"
   },
   "keywords": [
     "cloud-functions",
@@ -15,6 +16,8 @@
   "author": "saphalpdyl",
   "license": "MIT",
   "devDependencies": {
-    "@google-cloud/functions-framework": "^3.3.0"
+    "@google-cloud/functions-framework": "^3.3.0",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
   }
 }
