@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npx functions-framework --target=card",
-    "dev": "nodemon -L ./test_express.js"
+    "dev": "nodemon -L ./test_express.js",
+    "deploy": "gcloud functions deploy recent_repo_card --trigger-http --runtime=nodejs20 --region=us-central1 --entry-point=card --allow-unauthenticated"
   },
   "keywords": [
     "cloud-functions",
@@ -17,8 +18,10 @@
   "license": "MIT",
   "devDependencies": {
     "@google-cloud/functions-framework": "^3.3.0",
-    "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "nodemon": "^3.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.2"
   }
 }
