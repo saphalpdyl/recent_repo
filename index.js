@@ -4,8 +4,24 @@ const TRUNCATE_CHAR_THRESHOLD = 50;
 const GITHUB_USERNAME = 'saphalpdyl';
 const SORT_BY = 'pushed';
 
+if (process.env.NODE_ENV !== 'prod') {
+  const dotenv = await import('dotenv');
+  dotenv.config();
+}
+
+const API_HEADER = new Headers({
+  'Authorization' : `Bearer ${process.env.GITHUB_TOKEN}`,
+  'Content-Type' : 'application/json'
+})
+
+
 export const card = async (_,res) => {
-  const repo_response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=${SORT_BY}&order=desc`);
+  const repo_response = await fetch(
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=${SORT_BY}&order=desc`,
+    {
+      headers: API_HEADER
+    }
+  );
   const json_response = await repo_response.json();
   const repo = json_response[0];
 
@@ -14,7 +30,12 @@ export const card = async (_,res) => {
   const repo_name = repo['name'];
   const repo_size = repo['size'];
 
-  const commits_response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repo_name}/commits?per_page=${COMMITS_TO_REQUEST}`);
+  const commits_response = await fetch(
+    `https://api.github.com/repos/${GITHUB_USERNAME}/${repo_name}/commits?per_page=${COMMITS_TO_REQUEST}`,
+    {
+      headers: API_HEADER
+    }
+  );
   const commits = await commits_response.json();
 
   const createCommitText = (sha, commit_msg, commit_no) => {
@@ -50,16 +71,20 @@ export const card = async (_,res) => {
   const currentDate = new Date();
   const currentTime = currentDate.getTime();
 
+  // Calculating dynamic font size for title
+  // Clamping fontsize to 40 until 10 characters
+  const titleFontSize = 400 / (repo_name.length >= 10 ? repo_name.length : 10);
+
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader('access-control-allow-origin','*')
   res.setHeader('Cache-Control','no-store')
   res.send(`
     <svg xmlns="http://www.w3.org/2000/svg" width="600" height="200">
         <rect width="600" height="200" style="fill:#212121;" stroke="#4CCF90" stroke-width="2" />
-        <text fill="#ffffff" x="20" y="42" font-size="34" font-family="Segoe UI,Verdana,sans-serif" font-weight="bold">
+        <text fill="#ffffff" x="20" y="42" font-size="${titleFontSize}" font-family="Segoe UI,Verdana,sans-serif" font-weight="bold">
             ${repo_name}
         </text>
-        <text fill="#ffffff" x="235" y="43" fill-opacity="0.31" font-size="14" font-family="Segoe UI,Verdana,sans-serif" font-weight="100">
+        <text fill="#ffffff" x="260" y="43" fill-opacity="0.31" font-size="14" font-family="Segoe UI,Verdana,sans-serif" font-weight="100">
             ${repo_full_name}
         </text>
 
