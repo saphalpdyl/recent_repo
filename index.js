@@ -25,7 +25,7 @@ export const card = async (_,res) => {
   const json_response = await repo_response.json();
   const repo = json_response[0];
 
-  const repo_last_updated = repo['updated_at'];
+  const repo_last_pushed = repo['pushed_at'];
   const repo_full_name = repo['full_name'];
   const repo_name = repo['name'];
   const repo_size = repo['size'];
@@ -94,7 +94,7 @@ export const card = async (_,res) => {
         <rect x="544.438" y="36.4" width="41.5625" height="6.6" fill="#28A5FF" fill-opacity="0.62"/>
 
         <text x="20" y="68" font-family="Segoe UI,Verdana,sans-serif" fill="#fff" font-size="16" font-weight="100" fill-opacity="0.31">
-            Last updated on ${repo_last_updated}
+            Last updated on ${repo_last_pushed}
         </text>
         <text x="20" y="104" fill="#4CCF90" font-size="14" font-family="Segoe UI,Verdana,sans-serif" font-weight="700" >
             Recent commits
