@@ -1,3 +1,6 @@
+// IMPORTS
+import moment from 'moment';
+
 // CONSTANTS
 const COMMITS_TO_REQUEST = 3;
 const TRUNCATE_CHAR_THRESHOLD = 50;
@@ -25,7 +28,8 @@ export const card = async (_,res) => {
   const json_response = await repo_response.json();
   const repo = json_response[0];
 
-  const repo_last_pushed = repo['pushed_at'];
+  // Repo information
+  const repo_last_pushed = moment.utc(repo['pushed_at']).local().startOf("seconds").fromNow();
   const repo_full_name = repo['full_name'];
   const repo_name = repo['name'];
   const repo_size = repo['size'];
@@ -94,7 +98,7 @@ export const card = async (_,res) => {
         <rect x="544.438" y="36.4" width="41.5625" height="6.6" fill="#28A5FF" fill-opacity="0.62"/>
 
         <text x="20" y="68" font-family="Segoe UI,Verdana,sans-serif" fill="#fff" font-size="16" font-weight="100" fill-opacity="0.31">
-            Last updated on ${repo_last_pushed}
+            Last pushed ${repo_last_pushed}
         </text>
         <text x="20" y="104" fill="#4CCF90" font-size="14" font-family="Segoe UI,Verdana,sans-serif" font-weight="700" >
             Recent commits
