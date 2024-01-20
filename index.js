@@ -18,7 +18,10 @@ const API_HEADER = new Headers({
 })
 
 
-export const card = async (_,res) => {
+export const card = async (req,res) => {
+  // Extracting query
+  const repo_pos = req.query['pos'] || 0 // pos = 0 means latest one
+
   const repo_response = await fetch(
     `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=${SORT_BY}&order=desc`,
     {
@@ -26,7 +29,7 @@ export const card = async (_,res) => {
     }
   );
   const json_response = await repo_response.json();
-  const repo = json_response[0];
+  const repo = json_response[repo_pos];
 
   // Repo information
   const repo_last_pushed = moment.utc(repo['pushed_at']).local().startOf("seconds").fromNow();
