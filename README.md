@@ -1,3 +1,10 @@
+**`🔴 DEPRECATED `**
+**`🟡 ARCHIVED`**
+
+Please be informed that this project is now deprecated and no longer actively maintained. I've rolled out a new and improved [Version 2](https://github.com/saphalpdyl/Recent-repo-2), reimagined in TypeScript, and it's currently hosted on Vercel.
+
+For the latest and greatest, head over to [Version 2](https://github.com/saphalpdyl/Recent-repo-2). This older version won't be receiving any further updates or support. However, the GCF will keep on running for history purpose. 😆
+
 # Dynamic GitHub Activity SVG Card
 
 This GCP Cloud Function renders a dynamic SVG card that displays information about your most recently updated GitHub repository, including:
